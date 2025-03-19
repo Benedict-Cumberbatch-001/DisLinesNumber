@@ -4,7 +4,7 @@ import argparse
 import fitz  # pip install PyMuPDF
 
 def process_pdf(file_path, width):
-    """处理单个PDF文件，应用红线遮盖效果"""
+    """处理PDF文件，应用红线遮盖效果"""
     try:
         doc = fitz.open(file_path)
     except Exception as e:
@@ -14,12 +14,11 @@ def process_pdf(file_path, width):
     for page in doc:
         # 定义遮盖区域：从页面左侧(0,0)到(width,页面高度)
         margin_rect = fitz.Rect(0, 0, width, page.rect.height)
-        # 添加红线注释，并指定填充为白色
-        page.add_redact_annot(margin_rect, fill=(1, 1, 1))
         # 应用红线，彻底删除该区域内的内容
+        page.add_redact_annot(margin_rect, fill=None)
         page.apply_redactions()
 
-    # 保存修改后的PDF，文件名为 原文件名_output.pdf
+    # 修改后的PDF文件名为: 原文件名_output.pdf
     base, ext = os.path.splitext(file_path)
     output_path = f"{base}_output.pdf"
     try:
@@ -39,14 +38,22 @@ def main():
     width = args.width
 
     if args.file:
-        # 如果指定了文件，则处理该文件
+        # 如果指定了PDF文件，则处理该文件
         process_pdf(args.file, width)
     else:
-        # 没有指定文件，则自动搜索当前文件夹内所有PDF文件
+        # 没有指定PDF文件，则自动搜索当前文件夹内所有PDF文件
         pdf_files = glob.glob("*.pdf")
+
         if not pdf_files:
-            print("当前文件夹内没有找到PDF文件。")
+            print("当前文件夹内没有找到PDF文件，请将待处理文件复制到当前目录")
             return
+        
+        # 排除已处理的pdf文件
+        pdf_files = [pdf for pdf in pdf_files if not pdf.endswith("_output.pdf")]
+        if not pdf_files:
+            print("所有PDF文件都已处理或没有可处理的PDF文件。注：脚本会自动屏蔽以_output.pdf结尾的已处理文件")
+            return
+
         for pdf in pdf_files:
             process_pdf(pdf, width)
 
