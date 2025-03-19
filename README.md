@@ -3,7 +3,7 @@
 
 有些时候为了便于阅读和定位，一些pdf不可避免的存在行号。例如在审稿时，大多数论文稿件的pdf存在行号。如果使用翻译软件阅读或者pdf文档翻译，经常存在翻译引擎误认为行号是名词的数量，将行号也参与翻译。[PDFMathTranslate](https://github.com/Byaidu/PDFMathTranslate) (*优秀的pdf翻译项目*)暂时也[没有很好的解决方法](https://github.com/Byaidu/PDFMathTranslate/issues/641)。
 
-`DisLinesNumber`是一个`python`脚本，其原理是在`pdf`存在行号的区域应用标注覆盖，从而达到删除行号的目的。在删除行号后，无论是[知云文献翻译](https://www.zhiyunwenxian.cn/)或者`pdf`文档翻译(`DeepL`,`PDFMathTranslate等`)都能够正常翻译。
+`DisLinesNumber`是一个`python`脚本，其原理是在`pdf`存在行号的区域应用标注覆盖，从而达到删除行号的目的。在删除行号后，无论是[知云文献翻译](https://www.zhiyunwenxian.cn/)或者`pdf`文档翻译(`DeepL`,`PDFMathTranslate`等)都能够正常翻译。
 
 ---
 # 使用方法
