@@ -31,4 +31,5 @@ python DisLinesNumber.py --width <your_width> --file <your_filename>
 ```
 
 将上面的`<your_width>`和`<your_filename>`分别替换为你要遮盖的宽度，和要处理的`pdf`文件路径。
+
 如果你是`Linux`或`MacOS`系统，可能需要将命令中的`python`替换为`python3`。
